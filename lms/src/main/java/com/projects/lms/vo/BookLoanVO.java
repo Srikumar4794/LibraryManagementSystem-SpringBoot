@@ -14,5 +14,6 @@ public class BookLoanVO {
     private String isbn;
     private Long cardId;
     private Date dateIn;
+    private Date dueDate;
     private Date dateOut;
 }

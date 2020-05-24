@@ -21,10 +21,16 @@ public class BookLoanController {
         return bookLoanService.getBookLoans(cardId, borrowerName, isbn);
     }
 
-    @PostMapping(path = "/api/v1/book-loan")
-    public BookLoanVO addBookLoan(@RequestBody @Valid BookLoanDTO bookLoanDTO)
+    @PostMapping(path = "/api/v1/book-loan/")
+    public BookLoanVO checkInBook(@RequestBody @Valid BookLoanDTO bookLoanDTO)
     {
         return bookLoanService.insertBookLoan(bookLoanDTO);
+    }
+
+    @PutMapping(path = "/api/v1/book-loan/{loanId}")
+    public BookLoanVO checkOutBook(@PathVariable Long loanId)
+    {
+        return bookLoanService.updateBookLoan(loanId);
     }
 
 }

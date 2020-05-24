@@ -29,6 +29,9 @@ public class BookLoanEntity {
     @Column(name = "date_in")
     private Date dateIn;
 
+    @Column(name = "due_date")
+    private Date dueDate;
+
     @Column(name = "date_out")
     private Date dateOut;
 
