@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface IBorrowerDao extends JpaRepository<BorrowerEntity, Long> {
+
+    Boolean existsBySsnEquals(String ssn);
 }

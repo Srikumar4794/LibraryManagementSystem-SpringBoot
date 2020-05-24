@@ -15,7 +15,7 @@ import java.util.List;
 public class BorrowerController {
     private final BorrowerService borrowerService;
 
-    @GetMapping(path = "/api/v1/borrowers/")
+    @GetMapping(path = "/api/v1/borrowers")
     public List<BorrowerVO> getAllBorrowers()
     {
         return borrowerService.getAllBorrowers();

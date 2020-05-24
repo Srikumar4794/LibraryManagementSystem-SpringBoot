@@ -35,13 +35,7 @@ public class BorrowerService {
     }
 
     private Boolean isSsnPresent(BorrowerVO borrowerVO) {
-        BorrowerEntity existingBorrower = borrowerDao.findById(borrowerVO.getCardId()).orElse(null);
-
-        if(existingBorrower == null)
-            return false;
-
-        return borrowerVO.getSsn().equals(existingBorrower.getSsn());
+        return borrowerDao.existsBySsnEquals(borrowerVO.getSsn());
     }
-
 }
 
