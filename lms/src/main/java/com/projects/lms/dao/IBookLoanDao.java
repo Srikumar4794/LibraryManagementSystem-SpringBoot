@@ -17,4 +17,8 @@ public interface IBookLoanDao extends JpaRepository<BookLoanEntity, Long>
             " and (:bName = ' ' or b.borrowerEntity.borrowerName like concat('%', upper(:bName), '%')) " +
             " and (:isbn = ' ' or b.isbn = :isbn)")
     List<BookLoanEntity> fetchBookLoans(@Param("cardId") Long cardId, @Param("bName")String borrower, @Param("isbn") String isbn);
+
+    Integer countAllByDateInIsNullAndDateOutIsNotNullAndCardId(Long cardId);
+
+    Boolean existsByDateInIsNullAndDateOutIsNotNullAndIsbn(String isbn);
 }

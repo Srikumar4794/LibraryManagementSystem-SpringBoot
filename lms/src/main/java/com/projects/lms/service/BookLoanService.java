@@ -7,18 +7,15 @@ import com.projects.lms.translator.IBookLoanTranslator;
 import com.projects.lms.utils.LibraryDateUtils;
 import com.projects.lms.vo.BookLoanVO;
 import lombok.Data;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @Service
 @Data
 public class BookLoanService {
+    private static final Integer MAX_BOOK_LOANS_ALLOWED = 3;
     private final IBookLoanDao bookLoanDao;
 
     @Autowired
@@ -31,6 +28,14 @@ public class BookLoanService {
 
     public BookLoanVO insertBookLoan(BookLoanDTO bookLoanDTO)
     {
+        if(!isBookLoanPermitted(bookLoanDTO.getCardId())){
+            throw new IllegalArgumentException("Book loan not allowed for card ID: " + bookLoanDTO.getCardId());
+        }
+
+        if(isBookAlreadyCheckedOut(bookLoanDTO.getIsbn())){
+            throw new IllegalArgumentException("Book with ISBN " + bookLoanDTO.getIsbn() + " has already been checked out");
+        }
+
         BookLoanEntity bookLoanEntity = BookLoanEntity.builder()
                         .isbn(bookLoanDTO.getIsbn())
                         .cardId(bookLoanDTO.getCardId())
@@ -39,6 +44,15 @@ public class BookLoanService {
                         .build();
 
         return bookLoanTranslator.toBookLoanVO(bookLoanDao.save(bookLoanEntity));
+    }
+
+    private boolean isBookAlreadyCheckedOut(String isbn) {
+        return bookLoanDao.existsByDateInIsNullAndDateOutIsNotNullAndIsbn(isbn);
+    }
+
+    private boolean isBookLoanPermitted(Long cardId) {
+        Integer existingLoans = bookLoanDao.countAllByDateInIsNullAndDateOutIsNotNullAndCardId(cardId);
+        return MAX_BOOK_LOANS_ALLOWED.compareTo(existingLoans) > 0;
     }
 
     public BookLoanVO updateBookLoan(Long loanId) {
