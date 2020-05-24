@@ -22,13 +22,13 @@ public class BookLoanController {
     }
 
     @PostMapping(path = "/api/v1/book-loan/")
-    public BookLoanVO checkInBook(@RequestBody @Valid BookLoanDTO bookLoanDTO)
+    public BookLoanVO checkOutBook(@RequestBody @Valid BookLoanDTO bookLoanDTO)
     {
         return bookLoanService.insertBookLoan(bookLoanDTO);
     }
 
     @PutMapping(path = "/api/v1/book-loan/{loanId}")
-    public BookLoanVO checkOutBook(@PathVariable Long loanId)
+    public BookLoanVO checkInBook(@PathVariable Long loanId)
     {
         return bookLoanService.updateBookLoan(loanId);
     }
