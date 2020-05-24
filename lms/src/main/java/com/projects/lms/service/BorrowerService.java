@@ -41,7 +41,6 @@ public class BorrowerService {
             return false;
 
         return borrowerVO.getSsn().equals(existingBorrower.getSsn());
-
     }
 
 }
