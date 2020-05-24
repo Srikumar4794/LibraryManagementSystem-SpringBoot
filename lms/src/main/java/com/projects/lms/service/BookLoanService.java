@@ -3,7 +3,10 @@ package com.projects.lms.service;
 import com.projects.lms.dao.IBookLoanDao;
 import com.projects.lms.dto.BookLoanDTO;
 import com.projects.lms.entity.BookLoanEntity;
+import com.projects.lms.translator.IBookLoanTranslator;
+import com.projects.lms.vo.BookLoanVO;
 import lombok.Data;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -14,12 +17,15 @@ import java.util.List;
 public class BookLoanService {
     private final IBookLoanDao bookLoanDao;
 
-    public List<BookLoanEntity> getBookLoans(Long cardId, String borrowerName, String isbn)
+    @Autowired
+    private IBookLoanTranslator bookLoanTranslator;
+
+    public List<BookLoanVO> getBookLoans(Long cardId, String borrowerName, String isbn)
     {
-        return bookLoanDao.fetchBookLoans(cardId, borrowerName, isbn);
+        return bookLoanTranslator.toBookLoanVOList(bookLoanDao.fetchBookLoans(cardId, borrowerName, isbn));
     }
 
-    public BookLoanEntity insertBookLoan(BookLoanDTO bookLoanDTO)
+    public BookLoanVO insertBookLoan(BookLoanDTO bookLoanDTO)
     {
         BookLoanEntity bookLoanEntity = BookLoanEntity.builder()
                         .isbn(bookLoanDTO.getIsbn())
@@ -27,6 +33,6 @@ public class BookLoanService {
                         .dateIn(new Date())
                         .build();
 
-        return bookLoanDao.save(bookLoanEntity);
+        return bookLoanTranslator.toBookLoanVO(bookLoanDao.save(bookLoanEntity));
     }
 }

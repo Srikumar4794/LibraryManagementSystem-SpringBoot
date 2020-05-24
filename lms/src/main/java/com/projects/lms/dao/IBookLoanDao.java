@@ -14,7 +14,7 @@ public interface IBookLoanDao extends JpaRepository<BookLoanEntity, Long>
     @Query("select b from BookLoanEntity b left join BorrowerEntity br " +
             " on b.cardId = br.cardId " +
             " where (:cardId is null or b.cardId = :cardId) " +
-            " and (:bName = '' or b.borrowerEntity.borrowerName like concat('%', upper(:bName), '%')) " +
-            " and (:isbn is null or b.isbn = :isbn)")
+            " and (:bName = ' ' or b.borrowerEntity.borrowerName like concat('%', upper(:bName), '%')) " +
+            " and (:isbn = ' ' or b.isbn = :isbn)")
     List<BookLoanEntity> fetchBookLoans(@Param("cardId") Long cardId, @Param("bName")String borrower, @Param("isbn") String isbn);
 }

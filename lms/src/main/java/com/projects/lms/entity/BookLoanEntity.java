@@ -33,10 +33,10 @@ public class BookLoanEntity {
     private Date dateOut;
 
     @JoinColumn(name = "isbn", referencedColumnName = "isbn", insertable = false, updatable = false)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private BookEntity bookEntity;
 
     @JoinColumn(name = "card_id", referencedColumnName = "Card_ID", insertable = false, updatable = false)
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private BorrowerEntity borrowerEntity;
 }
