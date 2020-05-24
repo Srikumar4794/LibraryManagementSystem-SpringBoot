@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
@@ -26,4 +27,10 @@ public class BookSearchEntity {
 
     @Column(name = "name")
     private String authorName;
+
+    @Column(name = "date_in")
+    private Date date_in;
+
+    @Column(name = "date_out")
+    private Date date_out;
 }
