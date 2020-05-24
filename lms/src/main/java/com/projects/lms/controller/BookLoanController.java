@@ -1,7 +1,6 @@
 package com.projects.lms.controller;
 
 import com.projects.lms.dto.BookLoanDTO;
-import com.projects.lms.entity.BookLoanEntity;
 import com.projects.lms.service.BookLoanService;
 import com.projects.lms.vo.BookLoanVO;
 import lombok.Data;
@@ -30,7 +29,7 @@ public class BookLoanController {
     @PutMapping(path = "/api/v1/book-loan/{loanId}")
     public BookLoanVO checkInBook(@PathVariable Long loanId)
     {
-        return bookLoanService.updateBookLoan(loanId);
+        return bookLoanService.checkInBook(loanId);
     }
 
 }

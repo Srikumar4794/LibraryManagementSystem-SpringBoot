@@ -55,7 +55,7 @@ public class BookLoanService {
         return MAX_BOOK_LOANS_ALLOWED.compareTo(existingLoans) > 0;
     }
 
-    public BookLoanVO updateBookLoan(Long loanId) {
+    public BookLoanVO checkInBook(Long loanId) {
         BookLoanEntity bookLoanEntity = bookLoanDao.findById(loanId).orElseThrow(() -> new IllegalArgumentException("No book loans found for loan id: "));
 
         bookLoanEntity.setDateIn(new Date());
