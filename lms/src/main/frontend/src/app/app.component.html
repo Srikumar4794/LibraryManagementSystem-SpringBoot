@@ -1,6 +1,6 @@
 <span class="cdk-overlay-container">
   <button (click)="getAuthors()">Authors</button>
-  <button (click)="displayAddAuthor()">Add an author</button>
+  <button (click)="displayAddAuthor()">Add an authorEntity</button>
 </span>
 
 
@@ -12,14 +12,14 @@
       <th>Name</th>
       </thead>
       <tbody>
-      <tr *ngFor="let author of authors">
-        <td>{{author.authorId}}</td>
-        <td *ngIf="!changeAuthorName && author.authorId != oldAuthor.authorId">
-          <a (click)="editAuthorName(author)">{{author.authorName}}</a>
+      <tr *ngFor="let authorEntity of authors">
+        <td>{{authorEntity.authorId}}</td>
+        <td *ngIf="!changeAuthorName && authorEntity.authorId != oldAuthor.authorId">
+          <a (click)="editAuthorName(authorEntity)">{{authorEntity.authorName}}</a>
         </td>
-        <td *ngIf="changeAuthorName && author.authorId == oldAuthor.authorId">
+        <td *ngIf="changeAuthorName && authorEntity.authorId == oldAuthor.authorId">
           <form *ngIf="changeAuthorName">
-            <input placeholder="Enter new author name" [(ngModel)]="newAuthorName"/>
+            <input placeholder="Enter new authorEntity name" [(ngModel)]="newAuthorName"/>
             <button (click)="updateAuthor()">Submit</button>
           </form>
         </td>

@@ -10,7 +10,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "book")
 @Data
-public class Book {
+public class BookEntity {
     @Id
     @Column(name = "isbn")
     private String isbn;

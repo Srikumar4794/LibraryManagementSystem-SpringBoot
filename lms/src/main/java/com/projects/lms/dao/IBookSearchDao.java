@@ -1,7 +1,6 @@
-/*
 package com.projects.lms.dao;
 
-import com.projects.lms.entity.BookAuthorSearch;
+import com.projects.lms.entity.BookSearchEntity;
 import com.projects.lms.entity.compositeKeys.BookAuthorCompositeKey;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -11,21 +10,17 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface IBookSearchDao extends JpaRepository<BookAuthorSearch, BookAuthorCompositeKey> {
+public interface IBookSearchDao extends JpaRepository<BookSearchEntity, BookAuthorCompositeKey> {
 
-    @Query(value = "(SELECT B.ISBN, A.NAME, B.TITLE " +
-            "FROM BOOK B INNER JOIN BOOK_AUTHORS BA " +
-            "ON B.ISBN = BA.ISBN " +
-            "AND (B.ISBN LIKE %:searchStr% OR B.TITLE LIKE %:searchStr) " +
-            "INNER JOIN AUTHORS A " +
-            "ON A.AUTHOR_ID = BA.AUTHOR_ID) " +
-            "UNION " +
-            "(SELECT BA.ISBN, A.NAME,B.TITLE " +
-            "FROM BOOK_AUTHORS BA INNER JOIN AUTHORS A " +
-            "ON BA.AUTHOR_ID = A.AUTHOR_ID " +
-            "AND A.NAME LIKE %:searchStr% " +
-            "INNER JOIN BOOK B " +
-            "ON B.ISBN = BA.ISBN) ", nativeQuery = true)
-    List<BookAuthorSearch> fetchBooksAndAuthorsBySearchTerm(@Param("searchStr") String searchTerm);
+    @Query("SELECT new BookSearchEntity(ba.authorId, b.isbn, b.title, a.authorName) from BookEntity b inner join BookAuthorEntity ba" +
+            " on b.isbn = ba.isbn inner join AuthorEntity a on a.authorId = ba.authorId where " +
+            " (b.isbn like concat('%', UPPER(:searchStr), '%') or b.title like concat('%', UPPER(:searchStr), '%')" +
+            " or a.authorName like concat('%', UPPER(:searchStr), '%'))")
+    List<BookSearchEntity> fetchBooksWithBookAuthorsBySearchTerm(@Param("searchStr") String searchStr);
+
+    @Query("SELECT new BookSearchEntity(a.authorId, b.isbn, b.title, a.authorName) from AuthorEntity a inner join BookAuthorEntity ba" +
+            " on a.authorId = ba.authorId inner join BookEntity b on b.isbn = ba.isbn where " +
+            " (b.isbn like concat('%', UPPER(:searchStr), '%') or b.title like concat('%', UPPER(:searchStr), '%')" +
+            " or a.authorName like concat('%', UPPER(:searchStr), '%'))")
+    List<BookSearchEntity> fetchAuthorsWithBookAuthorsBySearchTerm(@Param("searchStr") String searchStr);
 }
-*/

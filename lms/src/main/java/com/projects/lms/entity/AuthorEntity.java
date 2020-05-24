@@ -14,11 +14,11 @@ import javax.persistence.Table;
 @Table(name = "authors")
 @AllArgsConstructor
 @NoArgsConstructor
-public class Author {
+public class AuthorEntity {
     @Id
-    @Column(name = "author_id", nullable = false)
+    @Column(name = "author_id")
     private Long authorId;
 
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String authorName;
 }

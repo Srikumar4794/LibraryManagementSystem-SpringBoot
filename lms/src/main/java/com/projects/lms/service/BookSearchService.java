@@ -1,18 +1,17 @@
-/*
 package com.projects.lms.service;
 
 import com.projects.lms.dao.IAuthorDao;
 import com.projects.lms.dao.IBookAuthorDao;
 import com.projects.lms.dao.IBookDao;
 import com.projects.lms.dao.IBookSearchDao;
-import com.projects.lms.entity.BookAuthorSearch;
-import com.projects.lms.vo.BookSearchResultVO;
+import com.projects.lms.entity.BookSearchEntity;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 @Data
@@ -23,14 +22,14 @@ public class BookSearchService {
 
     private final IBookSearchDao bookSearchDao;
 
-    public List<BookSearchResultVO> getAllBooks(String searchText) {
+    public List<BookSearchEntity> getAllBooks(String searchText) {
         String[] words = searchText.split(" ");
-        List<BookSearchResultVO> searchResultList = new ArrayList<>();
+        //List<BookSearchResultVO> searchResultList = new ArrayList<>();
+        Set<BookSearchEntity> bookAuthorSearches = new HashSet<>();
         for(String word: words){
-            List<BookAuthorSearch> bookAuthorSearches = bookSearchDao.fetchBooksAndAuthorsBySearchTerm(searchText);
-
+            bookAuthorSearches.addAll(bookSearchDao.fetchBooksWithBookAuthorsBySearchTerm(word));
+            bookAuthorSearches.addAll(bookSearchDao.fetchAuthorsWithBookAuthorsBySearchTerm(word));
         }
-        return new ArrayList<>();
+        return new ArrayList<>(bookAuthorSearches);
     }
 }
-*/
