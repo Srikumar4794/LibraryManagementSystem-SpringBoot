@@ -68,4 +68,8 @@ public class FineService
     {
         return Math.abs(FINE_PER_DAY * LibraryDateUtils.findDaysElapsed(dueDate));
     }
+
+    public List<FineVO> getFinesByCardId(Long cardId) {
+        return fineTranslator.toFineVOList(fineDao.fetchFinesForCardId(cardId));
+    }
 }

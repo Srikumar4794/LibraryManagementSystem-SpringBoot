@@ -6,10 +6,18 @@ import com.projects.lms.vo.FineVO;
 import lombok.Data;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Data
 public class FineController {
     private final FineService fineService;
+
+    @GetMapping(path = "/api/v1/fines/{cardId}")
+    public List<FineVO> getFinesForBorrower(@PathVariable Long cardId)
+    {
+        return fineService.getFinesByCardId(cardId);
+    }
 
     @PostMapping(path = "/api/v1/refresh-fines")
     public void refreshAllFines()

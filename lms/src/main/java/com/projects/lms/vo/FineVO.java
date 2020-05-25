@@ -10,4 +10,6 @@ public class FineVO {
     private Long loanId;
     private Double fineAmount;
     private Boolean paid;
+    private String isbn;
+    private String bookName;
 }
