@@ -12,10 +12,11 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
+import static com.projects.lms.utils.Constants.MAX_BOOK_LOANS_ALLOWED;
+
 @Service
 @Data
 public class BookLoanService {
-    private static final Integer MAX_BOOK_LOANS_ALLOWED = 3;
     private final IBookLoanDao bookLoanDao;
 
     @Autowired
