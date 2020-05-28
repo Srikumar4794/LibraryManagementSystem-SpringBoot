@@ -29,8 +29,8 @@ public class BookSearchEntity {
     private String authorName;
 
     @Column(name = "date_in")
-    private Date date_in;
+    private Date dateIn;
 
     @Column(name = "date_out")
-    private Date date_out;
+    private Date dateOut;
 }

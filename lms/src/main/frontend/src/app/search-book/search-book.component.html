@@ -1,0 +1,27 @@
+<div class = "container search-form">
+  <h4 class="book-search-header">Book Search</h4>
+  <div class="form-inline">
+    <input class="form-control search-bar" type="text" [(ngModel)]="searchStr" placeholder="Enter any combination of ISBN, title and author name">
+    <button class="btn btn-info search-btn" type="submit" (click)="getBooks()">Search</button>
+  </div>
+
+  <div class="col-md-12 lms-table">
+    <table class="table table-bordered table-striped" style="margin-top: 50px">
+      <thead class="bg-success">
+        <th>ISBN</th>
+        <th>Book Title</th>
+        <th>Book Author</th>
+        <th>Availability</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of bookList">
+          <td>{{row.isbn}}</td>
+          <td>{{row.title}}</td>
+          <td>{{row.authorName}}</td>
+          <td>{{row.availability? "Available": "Not Available"}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
