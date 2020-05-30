@@ -26,5 +26,4 @@ export class BookLoansComponent implements OnInit {
   getFormattedDate(timestamp: number): string{
     return timestamp > 0 ? moment(timestamp).format("DD MMM YYYY") : "";
   }
-
 }
