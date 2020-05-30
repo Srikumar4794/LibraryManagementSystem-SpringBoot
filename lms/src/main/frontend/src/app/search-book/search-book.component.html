@@ -18,10 +18,30 @@
           <td>{{row.isbn}}</td>
           <td>{{row.title}}</td>
           <td>{{row.authorName}}</td>
-          <td><a routerLink="/book-loans" routerLinkActive="active">{{row.availability? "Available": "Not Available"}}</a> </td>
+          <td *ngIf="row.availability"> <button class="btn btn-link book-available" (click)="openCheckOutDialog(row)">Available</button></td>
+          <td class="book-na" *ngIf="!row.availability">Not Available</td>
         </tr>
       </tbody>
     </table>
   </div>
+
+  <p-dialog [style]="{'width': '30em'}" [(visible)]="displayCheckOut" positionTop="110" [modal]="true" [responsive]="true" closable="true">
+    <p-header>
+      Check-out book
+    </p-header>
+    <form [formGroup]="checkOutForm">
+      <div class="form-group">
+        <input class="form-control" type="text"  placeholder="Enter the card ID of borrower" formControlName="cardId">
+      </div>
+    </form>
+    <p-footer>
+      <button class="btn btn-success" (click)="checkOutBook()">Submit</button>
+      <button class="btn btn-danger" (click)="displayCheckOut = false;">Close</button>
+    </p-footer>
+
+  </p-dialog>
+
+
+
 </div>
 

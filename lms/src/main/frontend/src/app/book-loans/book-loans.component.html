@@ -1,1 +1,23 @@
-<p>book-loans works!</p>
+<div class = "container">
+  <div class="col-md-12 lms-table">
+    <table class="table table-bordered table-striped" style="margin-top: 50px">
+      <thead class="bg-success">
+        <th>ISBN</th>
+        <th>Borrower ID</th>
+        <th>Check-out Date</th>
+        <th>Due Date</th>
+        <th>Check-In Date</th>
+      </thead>
+      <tbody>
+      <tr *ngFor="let row of bookLoans">
+        <td>{{row.isbn}}</td>
+        <td>{{row.cardId}}</td>
+        <td>{{row.dateOut}}</td>
+        <td>{{row.dueDate}}</td>
+        <td>{{row.dateIn}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+

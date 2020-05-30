@@ -27,6 +27,7 @@ public class BookSearchService {
     @Autowired
     private IBookSearchTranslator bookSearchTranslator;
 
+    //TODO Handle scenario where each book has multiple authors.
     public List<BookSearchVO> getAllBooks(String searchText) {
         String[] words = searchText.split(" ");
         //List<BookSearchResultVO> searchResultList = new ArrayList<>();

@@ -12,6 +12,7 @@ import { BookLoansComponent } from './book-loans/book-loans.component';
 import { BorrowerManagementComponent } from './borrower-management/borrower-management.component';
 import { FinesComponent } from './fines/fines.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     TableModule,
     FormsModule,
     ReactiveFormsModule,
-    DialogModule
+    DialogModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

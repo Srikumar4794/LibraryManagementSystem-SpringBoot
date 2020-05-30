@@ -1,6 +1,6 @@
 .search-form{
   margin-top: 40px;
-  margin-left: 40px;
+  margin-left: 5px;
 }
 
 .book-search-header{
@@ -18,18 +18,18 @@
   margin-left: 10px;
 }
 
-.lms-table{
-  margin-left: -15px;
+.book-na{
+  color: #ff0000;
 }
 
-th{
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  border-radius: 5px;
+.book-available{
+  color: blue;
+  padding-top: 0;
 }
 
-td{
-  text-align: center;
+p-dialog .ui-dialog{
+  width: 100px;
 }
+
+
 
