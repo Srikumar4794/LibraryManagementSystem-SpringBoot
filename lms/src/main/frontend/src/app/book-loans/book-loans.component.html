@@ -12,9 +12,9 @@
       <tr *ngFor="let row of bookLoans">
         <td>{{row.isbn}}</td>
         <td>{{row.cardId}}</td>
-        <td>{{row.dateOut}}</td>
-        <td>{{row.dueDate}}</td>
-        <td>{{row.dateIn}}</td>
+        <td>{{getFormattedDate(row.dateOut)}}</td>
+        <td>{{getFormattedDate(row.dueDate)}}</td>
+        <td>{{getFormattedDate(row.dateIn)}}</td>
       </tr>
       </tbody>
     </table>

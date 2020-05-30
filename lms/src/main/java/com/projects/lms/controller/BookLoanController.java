@@ -20,6 +20,12 @@ public class BookLoanController {
         return bookLoanService.getBookLoans(cardId, borrowerName, isbn);
     }
 
+    @GetMapping(path = "/api/v1/book-loans/")
+    public List<BookLoanVO> getAllBookLoans()
+    {
+        return bookLoanService.getAllBookLoans();
+    }
+
     @PostMapping(path = "/api/v1/book-loan/")
     public BookLoanVO checkOutBook(@RequestBody @Valid BookLoanDTO bookLoanDTO)
     {

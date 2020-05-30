@@ -63,4 +63,8 @@ public class BookLoanService {
         bookLoanDao.save(bookLoanEntity);
         return bookLoanTranslator.toBookLoanVO(bookLoanEntity);
     }
+
+    public List<BookLoanVO> getAllBookLoans() {
+        return bookLoanTranslator.toBookLoanVOList(bookLoanDao.findAll());
+    }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {BookLoan} from "../../model/bookLoan.model";
 import {ActivatedRoute} from "@angular/router";
+import {BookLoanService} from "../../service/book-loan.service";
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-book-loans',
@@ -10,15 +12,19 @@ import {ActivatedRoute} from "@angular/router";
 export class BookLoansComponent implements OnInit {
   bookLoans: BookLoan[] = [];
 
-
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private bookLoanService: BookLoanService) { }
 
   ngOnInit(): void {
-    this.route.queryParams.subscribe(params =>{
-        console.log(params["bookLoan"]);
-        this.bookLoans.push(params["bookLoan"]);
-    }
-    )
+    this.bookLoanService.getAllBooks().subscribe(
+      (data) => {
+        this.bookLoans = data;
+        console.log(this.bookLoans);
+      }
+    );
+  }
+
+  getFormattedDate(timestamp: number): string{
+    return timestamp > 0 ? moment(timestamp).format("DD MMM YYYY") : "";
   }
 
 }

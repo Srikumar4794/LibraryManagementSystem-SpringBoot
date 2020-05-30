@@ -5,7 +5,8 @@
 export const environment = {
   production: false,
   bookSearchUrl: '/api/v1/search/',
-  bookLoan: '/api/v1/book-loan/'
+  bookLoanUrl: '/api/v1/book-loan/',
+  allBookLoansUrl: '/api/v1/book-loans/'
 };
 
 /*
