@@ -17,26 +17,31 @@ export class SearchBookComponent implements OnInit {
   displayCheckOut: boolean = false;
   checkOutForm: FormGroup;
   selectedIsbn: string = "";
+  displayError: boolean = false;
+  errorMsg: string = "";
 
   columns: any =
-    [{field: 'isbn', header: 'ISBN'},
-     {field: 'title', header: 'Title'},
-     {field: 'authorName', header: 'Author Name'},
-     {field: 'availability', header: 'Availability'}
+    [{field: 'isbn', header: 'ISBN', width: "15px"},
+     {field: 'title', header: 'Title', width: "55px"},
+     {field: 'authorName', header: 'Author Name', width: "35px"},
+     {field: 'availability', header: 'Availability', width: "5px"}
     ];
 
   constructor(private searchService: SearchService, private fb: FormBuilder, private bookLoanService: BookLoanService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.initializeForm();
+  }
+
+  initializeForm() {
     this.checkOutForm = this.fb.group({
-        cardId:[],
+        cardId: [],
       }
     );
   }
 
   getBooks() {
-    console.log(this.searchStr);
     this.searchService.getAllBooks(this.searchStr).subscribe(data => {
         this.bookList = data;
       }
@@ -55,13 +60,22 @@ export class SearchBookComponent implements OnInit {
     this.bookLoanService.checkOutBook(bookLoan)
                         .subscribe(
                           data =>{
-                              console.log(data);
                               this.displayCheckOut = false;
                               this.router.navigate(['/book-loans'], {
                                 queryParams: {
-                                  "bookLoan": data
+                                  "bookLoan": JSON.stringify(data)
                                 }});
-                           }
+                           },
+                          error => {
+                            console.log(error);
+                            this.displayError = true;
+                            this.errorMsg = error.error.message;
+                          }
                         );
+  }
+
+  closeCheckOut() {
+    this.displayCheckOut = false;
+    this.initializeForm();
   }
 }

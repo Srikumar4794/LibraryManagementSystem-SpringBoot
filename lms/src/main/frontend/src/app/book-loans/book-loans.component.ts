@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BookLoan} from "../../model/bookLoan.model";
 import {ActivatedRoute} from "@angular/router";
 import {BookLoanService} from "../../service/book-loan.service";
@@ -18,8 +18,10 @@ export class BookLoansComponent implements OnInit {
      {field: 'dueDate', header: 'Due Date'},
      {field: 'dateIn', header: 'Check-In Date'}
     ];
+  recentlyCheckedOut: BookLoan;
 
-  constructor(private route: ActivatedRoute, private bookLoanService: BookLoanService) { }
+  constructor(private route: ActivatedRoute, private bookLoanService: BookLoanService) {
+  }
 
   ngOnInit(): void {
     this.bookLoanService.getAllBooks().subscribe(
@@ -27,8 +29,20 @@ export class BookLoansComponent implements OnInit {
         this.bookLoans = data;
         this.sortBookLoansBasedOnCheckOut();
         console.log(this.bookLoans);
+        this.filterBasedOnNav();
       }
     );
+  }
+
+  filterBasedOnNav() {
+    this.route.queryParams.subscribe(params =>{
+      this.recentlyCheckedOut = JSON.parse(params["bookLoan"]);
+      this.bookLoans = this.bookLoans.filter(loan => loan.cardId == this.recentlyCheckedOut.cardId);
+    });
+  }
+
+  ngOnDestroy(): void {
+    this.recentlyCheckedOut = null;
   }
 
   getFormattedDate(timestamp: number): string{

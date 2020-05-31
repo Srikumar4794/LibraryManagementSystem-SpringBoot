@@ -1,7 +1,9 @@
 <div class="lms-table container">
   <p-table [value]="bookLoans" [pSortableColumn]="'dateOut'" [sortOrder]="-1"  styleClass="table table-bordered table-dark">
     <ng-template pTemplate="caption">
-      <div style="text-align: left">Book Loans</div>
+      <div style="text-align: left">Book Loans
+        <ng-container *ngIf="recentlyCheckedOut"> for borrower {{this.recentlyCheckedOut?.cardId}}</ng-container>
+      </div>
     </ng-template>
     <ng-template pTemplate="header">
       <th *ngFor="let col of columns">

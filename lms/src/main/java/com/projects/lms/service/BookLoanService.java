@@ -30,7 +30,7 @@ public class BookLoanService {
     public BookLoanVO insertBookLoan(BookLoanDTO bookLoanDTO)
     {
         if(!isBookLoanPermitted(bookLoanDTO.getCardId())){
-            throw new IllegalArgumentException("Book loan not allowed for card ID: " + bookLoanDTO.getCardId());
+            throw new IllegalArgumentException("Error! " + MAX_BOOK_LOANS_ALLOWED + " books checked-out already by " + bookLoanDTO.getCardId());
         }
 
         if(isBookAlreadyCheckedOut(bookLoanDTO.getIsbn())){

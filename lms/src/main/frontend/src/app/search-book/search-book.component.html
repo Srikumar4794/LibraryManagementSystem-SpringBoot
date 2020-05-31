@@ -1,27 +1,29 @@
 <div class = "container search-page">
   <h4 class="book-search-header">Book Search</h4>
   <div class="form-inline">
-    <input class="form-control search-bar" type="text" [(ngModel)]="searchStr" placeholder="Enter any combination of ISBN, title and author name">
+    <input class="form-control search-bar" type="text" [(ngModel)]="searchStr"
+           placeholder="Enter any combination of ISBN, title and author name"
+            (keydown.enter)="getBooks()">
     <button class="btn btn-info search-btn" type="submit" (click)="getBooks()">Search</button>
   </div>
 
   <div class="lms-table">
-    <p-table [value]="bookList" [columns]="columns" [autoLayout]="true" [resizableColumns]="true" styleClass="table table-bordered table-dark">
+    <p-table [value]="bookList" [columns]="columns" [resizableColumns]="true" styleClass="table table-bordered table-dark">
       <ng-template pTemplate="caption">
         <div style="text-align: left">Book Search Results</div>
       </ng-template>
       <ng-template pTemplate="header">
-        <th *ngFor="let col of columns">
+        <th *ngFor="let col of columns" [style.width]="col.width">
           {{col.header}}
         </th>
       </ng-template>
       <ng-template pTemplate="body" let-book>
         <tr>
-          <td *ngFor="let col of columns">
+          <td *ngFor="let col of columns" [style.width]="col.width">
            <span *ngIf="col.field != 'availability'">{{book[col.field]}}</span>
            <span *ngIf="col.field == 'availability'">
              <span class="book-na" *ngIf="!book[col.field]">Not available</span>
-             <button *ngIf="book[col.field]" class="btn btn-link" (click)="checkOutBook()">Check-out</button>
+             <button *ngIf="book[col.field]" class="btn btn-link" (click)="openCheckOutDialog(book)">Check-out</button>
            </span>
           </td>
         </tr>
@@ -36,13 +38,13 @@
     <form [formGroup]="checkOutForm">
       <div class="form-group">
         <input class="form-control" type="text"  placeholder="Enter the card ID of borrower" formControlName="cardId">
+        <div class="alert alert-danger" *ngIf="displayError">{{errorMsg}}</div>
       </div>
     </form>
     <p-footer>
       <button class="btn btn-success" (click)="checkOutBook()">Submit</button>
-      <button class="btn btn-danger" (click)="displayCheckOut = false;">Close</button>
+      <button class="btn btn-danger" (click)="closeCheckOut()">Close</button>
     </p-footer>
-
   </p-dialog>
 
 
