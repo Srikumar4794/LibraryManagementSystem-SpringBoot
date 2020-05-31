@@ -10,10 +10,13 @@ import {BorrowerService} from "../../service/borrower.service";
 })
 export class BorrowerManagementComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private borrowerService: BorrowerService) {
+  constructor(private fb: FormBuilder, private borrowerService: BorrowerService,
+  ) {
   }
 
   borrowerForm: FormGroup;
+  displayBorrowerErr: boolean;
+  borrowerMsg: string;
 
   ngOnInit(): void {
     this.initializeBorrowerForm();
@@ -51,7 +54,8 @@ export class BorrowerManagementComponent implements OnInit {
         console.log("Borrower added with id: " + data.cardId);
       },
       error => {
-        console.log(error.error.message);
+        this.displayBorrowerErr = true;
+        this.borrowerMsg = error.error.message;
       }
     )
   }
