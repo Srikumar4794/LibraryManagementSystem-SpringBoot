@@ -18,6 +18,13 @@ export class SearchBookComponent implements OnInit {
   checkOutForm: FormGroup;
   selectedIsbn: string = "";
 
+  columns: any =
+    [{field: 'isbn', header: 'ISBN'},
+     {field: 'title', header: 'Title'},
+     {field: 'authorName', header: 'Author Name'},
+     {field: 'availability', header: 'Availability'}
+    ];
+
   constructor(private searchService: SearchService, private fb: FormBuilder, private bookLoanService: BookLoanService,
               private router: Router) { }
 

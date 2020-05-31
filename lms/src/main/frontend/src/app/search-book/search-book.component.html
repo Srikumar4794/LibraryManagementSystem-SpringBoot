@@ -1,28 +1,32 @@
-<div class = "container search-form">
+<div class = "container search-page">
   <h4 class="book-search-header">Book Search</h4>
   <div class="form-inline">
     <input class="form-control search-bar" type="text" [(ngModel)]="searchStr" placeholder="Enter any combination of ISBN, title and author name">
     <button class="btn btn-info search-btn" type="submit" (click)="getBooks()">Search</button>
   </div>
 
-  <div class="col-md-12 lms-table">
-    <table class="table table-bordered table-striped" style="margin-top: 50px">
-      <thead class="bg-success">
-        <th>ISBN</th>
-        <th>Book Title</th>
-        <th>Book Author</th>
-        <th>Availability</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of bookList">
-          <td>{{row.isbn}}</td>
-          <td>{{row.title}}</td>
-          <td>{{row.authorName}}</td>
-          <td *ngIf="row.availability"> <button class="btn btn-link book-available" (click)="openCheckOutDialog(row)">Available</button></td>
-          <td class="book-na" *ngIf="!row.availability">Not Available</td>
+  <div class="lms-table">
+    <p-table [value]="bookList" [columns]="columns" [autoLayout]="true" [resizableColumns]="true" styleClass="table table-bordered table-dark">
+      <ng-template pTemplate="caption">
+        <div style="text-align: left">Book Search Results</div>
+      </ng-template>
+      <ng-template pTemplate="header">
+        <th *ngFor="let col of columns">
+          {{col.header}}
+        </th>
+      </ng-template>
+      <ng-template pTemplate="body" let-book>
+        <tr>
+          <td *ngFor="let col of columns">
+           <span *ngIf="col.field != 'availability'">{{book[col.field]}}</span>
+           <span *ngIf="col.field == 'availability'">
+             <span class="book-na" *ngIf="!book[col.field]">Not available</span>
+             <button *ngIf="book[col.field]" class="btn btn-link" (click)="checkOutBook()">Check-out</button>
+           </span>
+          </td>
         </tr>
-      </tbody>
-    </table>
+      </ng-template>
+    </p-table>
   </div>
 
   <p-dialog [style]="{'width': '30em'}" [(visible)]="displayCheckOut" positionTop="110" [modal]="true" [responsive]="true" closable="true">

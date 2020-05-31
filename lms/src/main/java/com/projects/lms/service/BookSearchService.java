@@ -30,7 +30,6 @@ public class BookSearchService {
     //TODO Handle scenario where each book has multiple authors.
     public List<BookSearchVO> getAllBooks(String searchText) {
         String[] words = searchText.split(" ");
-        //List<BookSearchResultVO> searchResultList = new ArrayList<>();
         Set<BookSearchEntity> bookAuthorSearches = new HashSet<>();
         for(String word: words){
             bookAuthorSearches.addAll(bookSearchDao.fetchBooksWithBookAuthorsBySearchTerm(word));

@@ -1,3 +1,7 @@
+.lms-table{
+  margin: 50px auto;
+}
+
 th{
   padding-top: 12px;
   padding-bottom: 12px;
@@ -8,4 +12,9 @@ th{
 .search-form{
   margin-top: 40px;
   margin-left: 5px;
+}
+
+td{
+  text-align: center;
+  vertical-align: middle;
 }
