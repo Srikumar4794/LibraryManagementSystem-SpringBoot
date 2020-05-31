@@ -1,7 +1,7 @@
 <div class = "container search-form">
   <h4>Book Loans</h4>
   <div class="col-md-12 lms-table">
-    <table class="table table-bordered table-striped" style="margin-top: 50px">
+    <table class="table table-bordered table-striped ui-sortable-column" style="margin-top: 50px">
       <thead class="bg-success">
         <th>ISBN</th>
         <th>Borrower ID</th>
@@ -17,7 +17,7 @@
         <td>{{getFormattedDate(row.dueDate)}}</td>
         <td *ngIf="row.dateIn">{{getFormattedDate(row.dateIn)}}</td>
         <td *ngIf="!row.dateIn">
-          <button class="btn btn-link">Check-in</button>
+          <button class="btn btn-link" (click)="checkInBook(row)">Check-in</button>
         </td>
       </tr>
       </tbody>

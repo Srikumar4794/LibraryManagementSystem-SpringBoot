@@ -18,6 +18,7 @@ export class BookLoansComponent implements OnInit {
     this.bookLoanService.getAllBooks().subscribe(
       (data) => {
         this.bookLoans = data;
+        this.sortBookLoansBasedOnCheckOut();
         console.log(this.bookLoans);
       }
     );
@@ -26,4 +27,19 @@ export class BookLoansComponent implements OnInit {
   getFormattedDate(timestamp: number): string{
     return timestamp > 0 ? moment(timestamp).format("DD MMM YYYY") : "";
   }
+
+  checkInBook(row: BookLoan) {
+    this.bookLoanService.checkInBook(row).subscribe(
+      data => {
+        this.bookLoans.splice(this.bookLoans.indexOf(row), 1);
+        this.bookLoans.push(data);
+        this.sortBookLoansBasedOnCheckOut();
+      }
+    );
+  }
+
+  sortBookLoansBasedOnCheckOut(){
+    this.bookLoans.sort((loan1, loan2) => loan2.dueDate - loan1.dueDate);
+  }
+
 }
