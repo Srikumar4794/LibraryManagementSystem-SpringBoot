@@ -1,7 +1,7 @@
 export class Borrower {
-  name: string;
+  borrowerName: string;
   address: string;
   ssn: string;
-  phoneNumber: string;
+  phone: string;
   cardId: number;
 }

@@ -26,8 +26,8 @@ export class BorrowerManagementComponent implements OnInit {
     this.borrowerForm = this.fb.group(
       {
         name: new FormGroup({
-          firstName: new FormControl("", Validators.required),
-          lastName: new FormControl("", Validators.required)
+          firstName: new FormControl(""),
+          lastName: new FormControl("")
         }),
         address: new FormGroup({
           street: new FormControl(""),
@@ -35,7 +35,7 @@ export class BorrowerManagementComponent implements OnInit {
           city: new FormControl(""),
           state: new FormControl(""),
         }),
-        ssn: new FormControl("", Validators.required),
+        ssn: new FormControl("", Validators.compose([Validators.required, Validators.pattern("^\d{3}-?\d{2}-?\d{4}")])),
         phoneNum: new FormControl("")
       }
     );
@@ -44,12 +44,13 @@ export class BorrowerManagementComponent implements OnInit {
   addBorrower() {
     let borrower: Borrower = new Borrower();
     if(this.borrowerForm.value){
-      borrower.name = this.getName(this.borrowerForm.value.name);
+      borrower.borrowerName = this.getName(this.borrowerForm.value.name);
       borrower.address = this.getAddress(this.borrowerForm.value.address);
       borrower.ssn = this.borrowerForm.value.ssn;
-      borrower.phoneNumber = this.borrowerForm.value.phoneNumber;
+      borrower.phone = this.borrowerForm.value.phoneNum;
     }
-    this.borrowerService.addNewBorrower(borrower).subscribe(
+    console.log(this.borrowerForm.valid);
+/*    this.borrowerService.addNewBorrower(borrower).subscribe(
       (data) => {
         console.log("Borrower added with id: " + data.cardId);
       },
@@ -57,7 +58,7 @@ export class BorrowerManagementComponent implements OnInit {
         this.displayBorrowerErr = true;
         this.borrowerMsg = error.error.message;
       }
-    )
+    )*/
   }
 
   getName(formElement: any): string{
