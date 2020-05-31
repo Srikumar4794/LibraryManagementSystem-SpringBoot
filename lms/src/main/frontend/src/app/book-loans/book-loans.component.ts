@@ -11,6 +11,13 @@ import * as moment from 'moment';
 })
 export class BookLoansComponent implements OnInit {
   bookLoans: BookLoan[] = [];
+  columns: any =
+    [{field: 'isbn', header: 'ISBN'},
+     {field: 'cardId', header: 'Borrower ID'},
+     {field: 'dateOut', header: 'Check-out Date'},
+     {field: 'dueDate', header: 'Due Date'},
+     {field: 'dateIn', header: 'Check-In Date'}
+    ];
 
   constructor(private route: ActivatedRoute, private bookLoanService: BookLoanService) { }
 
@@ -39,7 +46,7 @@ export class BookLoansComponent implements OnInit {
   }
 
   sortBookLoansBasedOnCheckOut(){
-    this.bookLoans.sort((loan1, loan2) => loan2.dueDate - loan1.dueDate);
+    this.bookLoans.sort((loan1, loan2) => loan2.dateOut - loan1.dateOut);
   }
 
 }

@@ -1,27 +1,26 @@
-<div class = "container search-form">
-  <h4>Book Loans</h4>
-  <div class="col-md-12 lms-table">
-    <table class="table table-bordered table-striped ui-sortable-column" style="margin-top: 50px">
-      <thead class="bg-success">
-        <th>ISBN</th>
-        <th>Borrower ID</th>
-        <th>Check-out Date</th>
-        <th>Due Date</th>
-        <th>Check-In Date</th>
-      </thead>
-      <tbody>
-      <tr *ngFor="let row of bookLoans">
-        <td>{{row.isbn}}</td>
-        <td>{{row.cardId}}</td>
-        <td>{{getFormattedDate(row.dateOut)}}</td>
-        <td>{{getFormattedDate(row.dueDate)}}</td>
-        <td *ngIf="row.dateIn">{{getFormattedDate(row.dateIn)}}</td>
-        <td *ngIf="!row.dateIn">
-          <button class="btn btn-link" (click)="checkInBook(row)">Check-in</button>
+<div class="lms-table container">
+  <p-table [value]="bookLoans" [pSortableColumn]="'dateOut'" [sortOrder]="-1"  styleClass="table table-bordered table-dark">
+    <ng-template pTemplate="caption">
+      <div style="text-align: left">Book Loans</div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <th *ngFor="let col of columns">
+        <p-sortIcon field="'dateOut'"></p-sortIcon>
+        {{col.header}}</th>
+    </ng-template>
+    <ng-template pTemplate="body" let-loan>
+      <tr>
+        <td *ngFor="let col of columns">
+          <span *ngIf="col.field == 'dateOut' || col.field == 'dueDate'">{{getFormattedDate(loan[col.field])}}</span>
+          <span *ngIf="col.field == 'isbn' || col.field == 'cardId'">{{loan[col.field]}}</span>
+          <span *ngIf="col.field == 'dateIn' && loan?.dateIn">{{getFormattedDate(loan?.dateIn)}}</span>
+          <span *ngIf="col.field == 'dateIn' && !loan?.dateIn">
+            <button class="btn btn-link" (click)="checkInBook(loan)">Check-in</button>
+          </span>
         </td>
       </tr>
-      </tbody>
-    </table>
-  </div>
+    </ng-template>
+  </p-table>
 </div>
+
 
