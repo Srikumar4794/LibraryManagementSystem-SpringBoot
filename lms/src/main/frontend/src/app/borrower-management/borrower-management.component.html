@@ -1,1 +1,54 @@
 
+<div class="container borrower-form">
+  <h5 style="padding-bottom: 20px">Borrower Details</h5>
+
+  <div class="form-group">
+    <form [formGroup]="borrowerForm" (submit)="addBorrower()">
+      <div class="form-group borrower-form-control" formGroupName="name">
+        <label for="firstName">
+          First Name
+          <input class="form-check-inline" type = "text" id="firstName" formControlName="firstName">
+        </label>
+        <label for="lastName">
+          Last Name
+          <input class="form-check-inline" type = "text" id="lastName" formControlName="lastName">
+        </label>
+      </div>
+
+      <div class="form-group borrower-form-control" formGroupName="address">
+        <label for="street">
+          Street
+          <input class="form-check-inline" style="width: 300px" type = "text" id="street" formControlName="street">
+        </label>
+        <label for="apt">
+          Apt#
+          <input class="form-check-inline" style="width: 70px" type = "text" id="apt" formControlName="apt">
+        </label>
+        <label for="city">
+          City
+          <input class="form-check-inline"  style="width: 150px" type = "text" id="city" formControlName="city">
+        </label>
+        <label for="state">
+          State
+          <input class="form-check-inline" style="width: 150px" type = "text" id="state" formControlName="state">
+        </label>
+      </div>
+
+      <div class="form-group borrower-form-control">
+          <label class="form-group" for="ssn">
+            Social Security Number
+            <input class="form-check-inline" style="width: 200px" type="text" id="ssn" formControlName="ssn" placeholder="E.g. 123-45-678">
+          </label>
+      </div>
+
+      <div class="form-group borrower-form-control">
+        <label class="form-group" for="phone">
+          Phone Number
+          <input class="form-check-inline" style="width: 200px" type="text" id="phone" formControlName="phoneNum" placeholder="(###)###-####">
+        </label>
+      </div>
+
+    <button class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
