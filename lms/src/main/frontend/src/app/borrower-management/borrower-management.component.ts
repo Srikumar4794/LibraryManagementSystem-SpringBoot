@@ -17,6 +17,7 @@ export class BorrowerManagementComponent implements OnInit {
   borrowerForm: FormGroup;
   displayBorrowerErr: boolean;
   borrowerMsg: string;
+  borrowerFormTitle: string = "Borrower details";
 
   ngOnInit(): void {
     this.initializeBorrowerForm();

@@ -1,9 +1,7 @@
 
 <div class="container borrower-form">
-  <h5 style="padding-bottom: 20px">Borrower Details</h5>
-
   <div class="form-group">
-    <form [formGroup]="borrowerForm" (submit)="addBorrower()">
+    <form [formGroup]="borrowerForm" (submit)="addBorrower()" [title]=borrowerFormTitle>
       <div class="form-group borrower-form-control" formGroupName="name">
         <label for="firstName">
           First Name
