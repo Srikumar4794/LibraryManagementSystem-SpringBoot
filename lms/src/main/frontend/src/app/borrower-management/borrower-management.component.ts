@@ -35,8 +35,8 @@ export class BorrowerManagementComponent implements OnInit {
           city: new FormControl(""),
           state: new FormControl(""),
         }),
-        ssn: new FormControl("", Validators.compose([Validators.required, Validators.pattern("^\d{3}-?\d{2}-?\d{4}")])),
-        phoneNum: new FormControl("")
+        ssn: new FormControl("", [Validators.required, Validators.pattern('^\\d{3}-?\\d{2}-?\\d{4}')]),
+        phoneNum: new FormControl("", [Validators.minLength(13), Validators.maxLength(13)])
       }
     );
   }

@@ -7,3 +7,11 @@
   border-width: thin;
   border-radius: 4px;
 }
+
+.ng-valid[required]{
+  border: 5px solid blue; /* green */
+}
+
+.ng-invalid:not(form)  {
+  border: 5px solid #ff0000; /* red */
+}
