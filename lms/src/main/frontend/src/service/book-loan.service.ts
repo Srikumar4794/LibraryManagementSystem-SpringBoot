@@ -15,8 +15,12 @@ export class BookLoanService {
     return this.http.post<BookLoan>(environment.bookLoanUrl, bookLoan);
   }
 
-  getAllBooks(): Observable<BookLoan[]>{
+  findAllBookLoans(): Observable<BookLoan[]>{
     return this.http.get<BookLoan[]>(environment.allBookLoansUrl);
+  }
+
+  getBookLoansBySearchTerm(cardId: number, bName: string, isbn: string): Observable<BookLoan[]>{
+    return this.http.get<BookLoan[]>(environment.allBookLoansUrl + cardId + '/' + bName + '/' + isbn + '/');
   }
 
   checkInBook(bookLoan: BookLoan): Observable<BookLoan> {

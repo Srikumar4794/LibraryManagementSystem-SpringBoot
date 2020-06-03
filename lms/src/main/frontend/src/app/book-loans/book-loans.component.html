@@ -1,5 +1,21 @@
+<div class="container form-inline book-loan-form">
+  <select class="btn btn-secondary dropdown-toggle" name="searchCriteria" [(ngModel)]="selectedOption">
+    <option *ngFor="let searchOpt of searchOptions" [value]="searchOpt.value">{{searchOpt.desc}}</option>
+  </select>
+  <label for="searchTerm">
+    <input type="text" placeholder="Search" class="form-control" id="searchTerm" [(ngModel)]="searchValue">
+  </label>
+  <button class="btn btn-primary" id="book-loan-search-btn" (click)="getBookLoans()">Submit</button>
+</div>
+
+<div class = "search-filter">
+  <label>
+    <input #search type="text" class="form-control" placeholder="Filter by ISBN, Card.No" (input)="dt.filterGlobal(search.value, 'contains')">
+  </label>
+</div>
+
 <div class="lms-table container">
-  <p-table [value]="bookLoans" [pSortableColumn]="'dateOut'" [sortOrder]="-1"  styleClass="table table-bordered table-dark">
+  <p-table #dt [value]="bookLoans" [globalFilterFields]="columns" [pSortableColumn]="'dateOut'" [sortOrder]="-1"  styleClass="table table-bordered table-dark">
     <ng-template pTemplate="caption">
       <div style="text-align: left">Book Loans
         <ng-container *ngIf="recentlyCheckedOut"> for borrower {{this.recentlyCheckedOut?.cardId}}</ng-container>
@@ -14,10 +30,10 @@
       <tr>
         <td *ngFor="let col of columns">
           <span *ngIf="col.field == 'dateOut' || col.field == 'dueDate'">{{getFormattedDate(loan[col.field])}}</span>
-          <span *ngIf="col.field == 'isbn' || col.field == 'cardId'">{{loan[col.field]}}</span>
+          <span *ngIf="col.field == 'isbn' || col.field == 'cardId' || col.field == 'borrowerName'">{{loan[col.field]}}</span>
           <span *ngIf="col.field == 'dateIn' && loan?.dateIn">{{getFormattedDate(loan?.dateIn)}}</span>
           <span *ngIf="col.field == 'dateIn' && !loan?.dateIn">
-            <button class="btn btn-link" (click)="checkInBook(loan)">Check-in</button>
+            <button class="btn btn-link check-in-btn" (click)="checkInBook(loan)">Check-in</button>
           </span>
         </td>
       </tr>

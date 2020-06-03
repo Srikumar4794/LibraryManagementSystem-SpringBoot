@@ -12,6 +12,7 @@ import java.util.Date;
 public class BookLoanVO {
     private Long loanId;
     private String isbn;
+    private String borrowerName;
     private Long cardId;
     private Date dateIn;
     private Date dueDate;

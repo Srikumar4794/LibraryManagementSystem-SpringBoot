@@ -14,24 +14,22 @@ export class BookLoansComponent implements OnInit {
   columns: any =
     [{field: 'isbn', header: 'ISBN'},
      {field: 'cardId', header: 'Borrower ID'},
+     {field: 'borrowerName', header: 'Borrower Name'},
      {field: 'dateOut', header: 'Check-out Date'},
      {field: 'dueDate', header: 'Due Date'},
      {field: 'dateIn', header: 'Check-In Date'}
     ];
+  searchOptions: any = [{value: "isbn", desc: "Book ID" }, {value: "cardId" , desc: "Borrower ID" }, {value: "bName" , desc: "Borrower Name"}];
   recentlyCheckedOut: BookLoan;
+  selectedOption: any = "cardId";
+  searchValue: any;
 
   constructor(private route: ActivatedRoute, private bookLoanService: BookLoanService) {
   }
 
   ngOnInit(): void {
-    this.bookLoanService.getAllBooks().subscribe(
-      (data) => {
-        this.bookLoans = data;
-        this.sortBookLoansBasedOnCheckOut();
-        console.log(this.bookLoans);
-        this.filterBasedOnNav();
-      }
-    );
+    this.filterBasedOnNav();
+    this.sortBookLoansBasedOnCheckOut();
   }
 
   filterBasedOnNav() {
@@ -63,4 +61,16 @@ export class BookLoansComponent implements OnInit {
     this.bookLoans.sort((loan1, loan2) => loan2.dateOut - loan1.dateOut);
   }
 
+  getBookLoans() {
+    console.log(this.selectedOption, this.searchValue);
+    let cardId: any = (this.selectedOption == "cardId") ? Number(this.searchValue): " ";
+    let isbn: string = (this.selectedOption == "isbn")? this.searchValue.toString(): " ";
+    let bName: string = (this.selectedOption == "bName")? this.searchValue: " ";
+    this.bookLoanService.getBookLoansBySearchTerm(cardId, bName, isbn).subscribe(
+      (data) => {
+        console.log(data);
+        this.bookLoans = data;
+      }
+    )
+  }
 }
