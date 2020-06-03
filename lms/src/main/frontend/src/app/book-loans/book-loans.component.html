@@ -3,9 +3,9 @@
     <option *ngFor="let searchOpt of searchOptions" [value]="searchOpt.value">{{searchOpt.desc}}</option>
   </select>
   <label for="searchTerm">
-    <input type="text" placeholder="Search" class="form-control" id="searchTerm" [(ngModel)]="searchValue">
+    <input type="text" placeholder="Search" class="form-control" id="searchTerm" [(ngModel)]="searchValue" (keydown.enter)="getBookLoans()">
   </label>
-  <button class="btn btn-primary" id="book-loan-search-btn" (click)="getBookLoans()">Submit</button>
+  <button class="btn btn-primary" id="book-loan-search-btn" (click)="getBookLoans()">Search</button>
 </div>
 
 <div class = "search-filter">
