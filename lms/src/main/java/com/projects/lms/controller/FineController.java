@@ -19,7 +19,7 @@ public class FineController {
         return fineService.getFinesByCardId(cardId);
     }
 
-    @PostMapping(path = "/api/v1/refresh-fines")
+    @GetMapping(path = "/api/v1/refresh-fines")
     public void refreshAllFines()
     {
         fineService.updateFines();

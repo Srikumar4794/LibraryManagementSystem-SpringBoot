@@ -39,7 +39,7 @@ public class FineService
             FineEntity fineEntity = FineEntity.builder()
                     .loanId(bookLoanEntity.getLoanId())
                     .paid(false)
-                    .fineAmount(calculateFineAmount(bookLoanEntity.getDueDate()))
+                    .fineAmount(calculateFineAmount(bookLoanEntity))
                     .build();
 
             fineEntities.add(fineEntity);
@@ -65,9 +65,13 @@ public class FineService
         return bookLoanDao.existsByDateInIsNullAndDateOutIsNotNullAndLoanId(loanId);
     }
 
-    private Double calculateFineAmount(Date dueDate)
+    private Double calculateFineAmount(BookLoanEntity bookLoanEntity)
     {
-        return Math.abs(FINE_PER_DAY * LibraryDateUtils.findDaysElapsed(dueDate));
+        Date pastDate = new Date();
+        if(bookLoanEntity.getDateIn() != null){
+            pastDate = bookLoanEntity.getDateIn();
+        }
+        return Math.abs(FINE_PER_DAY * LibraryDateUtils.findDaysElapsed(pastDate, bookLoanEntity.getDueDate()));
     }
 
     public List<FineVO> getFinesByCardId(Long cardId) {

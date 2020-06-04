@@ -16,9 +16,9 @@ public class LibraryDateUtils {
         return calendar.getTime();
     }
 
-    public static Long findDaysElapsed(Date date)
+    public static Long findDaysElapsed(Date dateA, Date dateB)
     {
-        long dateDiffInMillis = date.getTime() - new Date().getTime();
+        long dateDiffInMillis = dateA.getTime() - dateB.getTime();
         return TimeUnit.DAYS.convert(dateDiffInMillis, TimeUnit.MILLISECONDS);
     }
 }

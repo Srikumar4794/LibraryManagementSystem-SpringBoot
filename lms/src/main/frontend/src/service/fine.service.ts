@@ -12,7 +12,11 @@ export class FineService {
   constructor(private http: HttpClient) { }
 
   refreshFines(): void{
-    this.http.post(environment.refreshFinesUrl, {});
+    this.http.get(environment.refreshFinesUrl).subscribe(
+      (data) => {
+        console.log("done");
+      }
+    );
   }
 
   getFinesForBorrower(cardId: number): Observable<Fine[]>{
