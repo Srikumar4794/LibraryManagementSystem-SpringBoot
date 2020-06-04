@@ -1,1 +1,13 @@
-<p>fines works!</p>
+<div class="container">
+  <button class="btn btn-success refresh-fines-btn" (click)="refreshFines()">
+    Refresh fines
+  </button>
+  <div class="form-inline fine-search-form">
+    <label>
+      Card ID
+      <input type="text" class="form-control fine-search-input" [(ngModel)]="selectedCardID">
+    </label>
+  </div>
+
+</div>
+
