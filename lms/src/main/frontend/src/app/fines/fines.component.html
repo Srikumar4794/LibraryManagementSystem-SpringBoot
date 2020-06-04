@@ -2,12 +2,39 @@
   <button class="btn btn-success refresh-fines-btn" (click)="refreshFines()">
     Refresh fines
   </button>
-  <div class="form-inline fine-search-form">
-    <label>
-      Card ID
-      <input type="text" class="form-control fine-search-input" [(ngModel)]="selectedCardID">
-    </label>
-  </div>
+</div>
 
+<div class="form-inline fine-search-form">
+  <label>
+    Card ID
+    <input type="text" class="form-control fine-search-input" [(ngModel)]="selectedCardID">
+  </label>
+  <button class="btn btn-primary fine-search-btn" (click)="getFines()">Search</button>
+</div>
+
+
+<div class="lms-table container">
+  <p-table [columns]="columns" [value]="fineData" styleClass="table table-bordered table-dark">
+    <ng-template pTemplate="caption">
+      <div style="text-align: left">Fines
+        <ng-container *ngIf="displayCardIdHead"> for borrower: {{displayCardIdHead}}</ng-container>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+      <th *ngFor="let col of columns" [style.width]="col.width">
+        {{col.header}}
+      </th>
+    </ng-template>
+    <ng-template pTemplate="body" let-fine>
+      <tr>
+        <td *ngFor="let col of columns">
+          <span *ngIf="col.field == 'fineAmount'">${{fine[col.field]}}</span>
+          <span *ngIf="col.field == 'paid' && fine[col.field]">Paid</span>
+          <button *ngIf="col.field == 'paid' && !fine[col.field]" class="btn btn-link pay-fine-btn">Pay Fine</button>
+          <span *ngIf="col.field != 'paid' && col.field != 'fineAmount'">{{fine[col.field]}}</span>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </div>
 

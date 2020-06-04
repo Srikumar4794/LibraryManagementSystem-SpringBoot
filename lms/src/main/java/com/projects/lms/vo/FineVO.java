@@ -12,4 +12,5 @@ public class FineVO {
     private Boolean paid;
     private String isbn;
     private String bookName;
+    private String cardId;
 }

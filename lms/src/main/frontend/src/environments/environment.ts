@@ -8,7 +8,8 @@ export const environment = {
   bookLoanUrl: '/api/v1/book-loan/',
   allBookLoansUrl: '/api/v1/book-loans/',
   borrowerUrl: '/api/v1/borrower/',
-  refreshFinesUrl: '/api/v1/refresh-fines'
+  refreshFinesUrl: '/api/v1/refresh-fines',
+  finesUrl: '/api/v1/fines/'
 };
 
 /*

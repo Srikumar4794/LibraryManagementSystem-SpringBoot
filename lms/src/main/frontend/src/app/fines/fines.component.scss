@@ -5,10 +5,35 @@
 
 .fine-search-form{
   float: left;
-  margin-top: 100px;
+  margin-top: 50px;
+  margin-left: 85px;
 }
 
 .fine-search-input{
   margin-left: 10px;
   width: 100px;
+}
+
+.fine-search-btn{
+  margin-left: 10px;
+}
+
+.lms-table{
+  margin-top: 120px;
+}
+
+.pay-fine-btn{
+  font-size: inherit;
+}
+
+th{
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+td{
+  text-align: center;
+  vertical-align: middle;
 }

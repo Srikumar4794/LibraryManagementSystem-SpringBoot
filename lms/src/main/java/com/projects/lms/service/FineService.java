@@ -31,7 +31,8 @@ public class FineService
     public void updateFines()
     {
         List<BookLoanEntity> bookLoanEntities = bookLoanDao.fetchBookLoansWithExistingFines();
-        bookLoanEntities.addAll(bookLoanDao.fetchBookLoansEligibleForFines());
+        List<BookLoanEntity> bookLoansEligibleForFines = bookLoanDao.fetchBookLoansEligibleForFines();
+        bookLoanEntities.addAll(bookLoansEligibleForFines);
         List<FineEntity> fineEntities = new ArrayList<>();
 
         bookLoanEntities.forEach(bookLoanEntity -> {
