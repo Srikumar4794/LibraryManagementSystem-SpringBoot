@@ -42,4 +42,10 @@ export class FinesComponent implements OnInit {
     )
   }
 
+  payFine(fine: Fine) {
+    this.fineService.payFine(fine).subscribe((data) => {
+      this.fineData.splice(this.fineData.findIndex(fine => fine.loanId == data.loanId), 1)
+      this.totalFine -= fine.fineAmount;
+    })
+  }
 }

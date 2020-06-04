@@ -30,7 +30,8 @@
         <td *ngFor="let col of columns">
           <span *ngIf="col.field == 'fineAmount'">${{fine[col.field]}}</span>
           <span *ngIf="col.field == 'paid' && fine[col.field]">Paid</span>
-          <button *ngIf="col.field == 'paid' && !fine[col.field]" class="btn btn-link pay-fine-btn">Pay Fine</button>
+          <button *ngIf="col.field == 'paid' && !fine[col.field]" class="btn btn-link pay-fine-btn"
+           (click)="payFine(fine)">Pay Fine</button>
           <span *ngIf="col.field != 'paid' && col.field != 'fineAmount'">{{fine[col.field]}}</span>
         </td>
       </tr>

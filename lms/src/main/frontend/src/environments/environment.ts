@@ -9,7 +9,8 @@ export const environment = {
   allBookLoansUrl: '/api/v1/book-loans/',
   borrowerUrl: '/api/v1/borrower/',
   refreshFinesUrl: '/api/v1/refresh-fines',
-  finesUrl: '/api/v1/fines/'
+  finesUrl: '/api/v1/fines/',
+  payFinesUrl: '/api/v1/pay-fine/'
 };
 
 /*
