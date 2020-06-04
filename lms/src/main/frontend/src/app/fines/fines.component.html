@@ -16,8 +16,8 @@
 <div class="lms-table container">
   <p-table [columns]="columns" [value]="fineData" styleClass="table table-bordered table-dark">
     <ng-template pTemplate="caption">
-      <div style="text-align: left">Fines
-        <ng-container *ngIf="displayCardIdHead"> for borrower: {{displayCardIdHead}}</ng-container>
+      <div *ngIf="displayCardIdHead" style="text-align: left">
+        Total Fines for borrower {{displayCardIdHead}} : <span class="text-danger">${{this.totalFine}}</span>
       </div>
     </ng-template>
     <ng-template pTemplate="header">
