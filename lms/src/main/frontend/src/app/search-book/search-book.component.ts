@@ -23,7 +23,7 @@ export class SearchBookComponent implements OnInit {
   columns: any =
     [{field: 'isbn', header: 'ISBN', width: "15px"},
      {field: 'title', header: 'Title', width: "55px"},
-     {field: 'authorName', header: 'Author Name', width: "35px"},
+     {field: 'authorName', header: 'Authors', width: "35px"},
      {field: 'availability', header: 'Availability', width: "5px"}
     ];
 
