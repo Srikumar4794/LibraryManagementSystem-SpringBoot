@@ -10,7 +10,8 @@ import java.util.Set;
 
 @Mapper(componentModel = "spring")
 public interface IBookSearchTranslator {
-    @Mapping(target = "availability", expression = "java(!(bookSearchEntity.getDateIn()==null ^ bookSearchEntity.getDateOut()==null))")    BookSearchVO toBookSearchVO(BookSearchEntity bookSearchEntity);
+    @Mapping(target = "availability", expression = "java(!(bookSearchEntity.getDateIn()==null ^ bookSearchEntity.getDateOut()==null))")
+    BookSearchVO toBookSearchVO(BookSearchEntity bookSearchEntity);
 
     List<BookSearchVO> toBookSearchVOList(Set<BookSearchEntity> bookSearchEntityList);
 }

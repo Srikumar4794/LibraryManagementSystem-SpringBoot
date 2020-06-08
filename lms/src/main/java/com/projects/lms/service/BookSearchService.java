@@ -15,6 +15,8 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @Service
 @Data
@@ -35,6 +37,13 @@ public class BookSearchService {
             bookAuthorSearches.addAll(bookSearchDao.fetchBooksWithBookAuthorsBySearchTerm(word));
             bookAuthorSearches.addAll(bookSearchDao.fetchAuthorsWithBookAuthorsBySearchTerm(word));
         }
-        return bookSearchTranslator.toBookSearchVOList(bookAuthorSearches);
+        List<BookSearchVO> bookSearchVOList = bookSearchTranslator.toBookSearchVOList(bookAuthorSearches);
+        return new ArrayList<>(bookSearchVOList.stream()
+                .collect(Collectors.toMap(BookSearchVO::getIsbn, Function.identity(),
+                        (book1, book2) -> {
+                    book1.setAuthorName(book1.getAuthorName().concat(", ".concat(book2.getAuthorName())));
+                    return book1;
+                })).values())
+                ;
     }
 }
